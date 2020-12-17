@@ -3,6 +3,13 @@ import numpy as np
 from numpy.fft import fft, fftfreq
 
 def get_audio_data(filename):
+    '''
+    PARAMS:
+        filename: the file path of the file to get data from
+
+    RETURN:
+        (sample_rate, (x_data, y_data))
+    '''
     sample_rate, signal = wavfile.read(filename)
     y = signal[:, 0]
     x = np.arange(len(y)) / float(sample_rate)
@@ -11,6 +18,18 @@ def get_audio_data(filename):
 
 
 def make_fft(data, start, stop, sample_rate=44_100, scan_width=1, cutoff=0.5*1e8):
+    '''
+    PARAMS:
+        data: the full data trim/use
+        start: the first index to trim at
+        stop: the last index to trim at
+        sample_rate: the sample rate of the audio file the data is from
+        scan_width: the piano note radius to use for making bins for notable freqs
+        cutoff: the amplitude over which a frequency is considered notable
+
+    RETURN:
+        ((x_data, y_data), list_of_notable_freqs)
+    '''
     # Trim data
     data = data[start:stop]
 
