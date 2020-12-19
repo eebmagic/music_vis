@@ -11,13 +11,15 @@ if __name__ == "__main__":
     print('Finished loading from file.')
 
     total_seconds = len(y) / sample_rate
-    frame_rate = 30     # fps
+    # frame_rate = 30     # fps
+    frame_rate = 50     # fps 50 fps = 20ms per frame
     # sample_chunk_width = sample_rate // frame_rate
     tempo = 100     # bpm
     bps = tempo / 60
     samples_per_beat = int(sample_rate / bps)
     # sample_chunk_width = sample_rate
-    sample_chunk_width = samples_per_beat
+    # sample_chunk_width = samples_per_beat
+    sample_chunk_width = sample_rate / frame_rate   # width of 20ms (matches 50 fps)
     total_chunks = int(total_seconds * frame_rate)
     frame_step_width = int(sample_rate / frame_rate)
 
